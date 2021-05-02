@@ -20,7 +20,7 @@ if v:progname =~? "evim"
 endif
 
 " Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
+" source $VIMRUNTIME/defaults.vim
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -82,7 +82,54 @@ set foldlevel=99
 nnoremap <space> za
 
 set clipboard=unnamedplus
+
+" for vim-plug stuff
+call plug#begin('~/.vim/plugged')
+
+" folding improved
+Plug 'Konfekt/FastFold'
+Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/indentpython.vim' 
+Plug 'davidhalter/jedi-vim'
+"Plug 'cjrh/vim-conda'
+Plug 'vim-syntastic/syntastic'
+Plug 'nvie/vim-flake8'
+Plug 'jnurmine/Zenburn'
+Plug 'altercation/vim-colors-solarized'
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+" Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
+Plug 'junegunn/fzf.vim' " for fuzzy searching
+Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
+Plug 'scrooloose/nerdcommenter' " for commenting out lines
+Plug 'liuchengxu/vista.vim' " tagbar
+Plug 'jeetsukumaran/vim-pythonsense'
+Plug 'jiangmiao/auto-pairs' " auto quotation and paranthesis pairing
+Plug 'joshdick/onedark.vim' " theme
+Plug 'sheerun/vim-polyglot' " language support
+Plug 'Vimjas/vim-python-pep8-indent' " PEP8 plugin
+Plug 'dense-analysis/ale' " linting and autofixing
+
+call plug#end()
+
+" Plug-in related settings come after this
+
+colorscheme onedark
+
+" remap :Files search to CTRL-F
+nnoremap <silent> <C-F> :Files<CR>
+" remap :Rg for searching within files
+nnoremap <silent> <Leader>f :Rg<CR>
+
+" vim-conda settings
+"let g:python3_host_prog = 'C:\Users\Reuben\anaconda3\envs\torch1.7\python.exe'
+"let g:jedi#force_py_version = 2
+"let g:UltisnipsUsePythonVersion = 2
+
 nmap <F6> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']  " to ignore filetypes, add to array
+
 map <F4> :CondaChangeEnv<CR>
 
 " suppress vim-conda related messages
@@ -99,39 +146,5 @@ let g:ale_fixers = {
 nmap <F10> :ALEFix<CR>
 let g:ale_fix_on_save = 1
 
-" for vim-plug stuff
-call plug#begin('~/.vim/plugged')
-
-" folding improved
-Plug 'Konfekt/FastFold'
-Plug 'tmhedberg/SimpylFold'
-Plug 'vim-scripts/indentpython.vim' 
-Plug 'davidhalter/jedi-vim'
-Plug 'cjrh/vim-conda'
-Plug 'vim-syntastic/syntastic'
-Plug 'nvie/vim-flake8'
-Plug 'jnurmine/Zenburn'
-Plug 'altercation/vim-colors-solarized'
-Plug 'scrooloose/nerdtree'
-Plug 'kien/ctrlp.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim'}
-Plug 'junegunn/fzf.vim' " for fuzzy searching
-Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
-Plug 'scrooloose/nerdcommenter' " for commenting out lines
-Plug 'liuchengxu/vista.vim' " tagbar
-Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'jiangmiao/auto-pairs' " auto quotation and paranthesis pairing
-Plug 'joshdick/onedark.vim' " theme
-Plug 'sheerun/vim-polyglot' " language support
-Plug 'Vimjas/vim-python-pep8-indent' " PEP8 plugin
-Plug 'dense-analysis/ale' " linting and autofixing
-
-call plug#end()
-
-colorscheme onedark
-
-" remap :Files search to CTRL-F
-nnoremap <silent> <C-F> :Files<CR>
-" remap :Rg for searching within files
-nnoremap <silent> <Leader>f :Rg<CR>
+" airline theme
+let g:airline_theme='deus'
